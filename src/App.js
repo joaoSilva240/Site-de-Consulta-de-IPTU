@@ -137,11 +137,7 @@ export default function ConsultaIPTU() {
       <div style={styles.header}>
         <div style={styles.headerCard}>
           <div style={styles.headerContent}>
-            <div style={styles.logoPlaceholder}></div>
-            <div style={styles.headerText}>
-              <div style={styles.prefeituraDe}>PREFEITURA DE</div>
-              <div style={styles.boituva}>BOITUVA</div>
-            </div>
+            <img src="logo.png" alt="Prefeitura de Boituva" style={styles.logo} />
           </div>
         </div>
 
@@ -165,13 +161,12 @@ export default function ConsultaIPTU() {
             Número do Cadastro do Imóvel
           </label>
           <div style={styles.inputContainer}>
-            <span style={styles.hashIcon}>#</span>
             <input
               type="text"
               value={cadastro}
               onChange={(e) => setCadastro(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Ex: 01.02.034.0567.001"
+              placeholder="Digite apenas números"
               style={styles.input}
             />
           </div>
@@ -355,16 +350,16 @@ const styles = {
   headerContent: {
     display: 'flex',
     alignItems: 'center',
-    gap: '16px'
+    gap: '16px',
+    justifyContent: 'center'
   },
-  logoPlaceholder: {
-    width: '64px',
+  logo: {
     height: '64px',
-    background: '#e5e7eb',
-    borderRadius: '4px'
+    width: 'auto'
   },
   headerText: {
-    textAlign: 'left'
+    textAlign: 'left',
+    display: 'none'
   },
   prefeituraDe: {
     fontSize: '14px',
@@ -426,7 +421,7 @@ const styles = {
   },
   input: {
     width: '100%',
-    paddingLeft: '48px',
+    paddingLeft: '16px',
     paddingRight: '16px',
     paddingTop: '16px',
     paddingBottom: '16px',
