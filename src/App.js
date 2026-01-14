@@ -28,10 +28,19 @@ export default function ConsultaIPTU() {
           raw: false,
           defval: ''
         });
+
+        // Normalizar chaves (remover espaços extras) e valores
+        const dadosNormalizados = dados.map(item => {
+          const novoItem = {};
+          Object.keys(item).forEach(key => {
+            novoItem[key.trim()] = item[key];
+          });
+          return novoItem;
+        });
         
-        console.log('Planilha carregada com sucesso:', dados.length, 'registros');
-        console.log('Primeiro registro:', dados[0]);
-        setPlanilhaData(dados);
+        console.log('Planilha carregada com sucesso:', dadosNormalizados.length, 'registros');
+        console.log('Primeiro registro:', dadosNormalizados[0]);
+        setPlanilhaData(dadosNormalizados);
       } catch (error) {
         console.error('Erro ao carregar planilha:', error);
         const dadosExemplo = [
@@ -61,7 +70,9 @@ export default function ConsultaIPTU() {
   const parseValor = (valor) => {
     if (typeof valor === 'number') return valor;
     if (!valor) return 0;
-    return parseFloat(valor.toString().replace(/\./g, '').replace(',', '.'));
+    // Remove R$, espaços e vírgulas (formato americano/excel: 76,294.07)
+    const valorLimpo = valor.toString().replace(/R\$/g, '').replace(/\s/g, '').replace(/,/g, '');
+    return parseFloat(valorLimpo);
   };
 
   const formatarMoeda = (valor) => {
