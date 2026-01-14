@@ -322,7 +322,7 @@ export default function ConsultaIPTU() {
 
       {/* Footer */}
       <div style={styles.footer}>
-        © 2025 Prefeitura Municipal de Boituva.
+        © 2026 Prefeitura Municipal de Boituva.
       </div>
     </div>
   );
@@ -341,7 +341,7 @@ const styles = {
   },
   headerCard: {
     display: 'inline-block',
-    background: 'white',
+    background: '#0d9488',
     borderRadius: '8px',
     boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
     padding: '16px 32px',
