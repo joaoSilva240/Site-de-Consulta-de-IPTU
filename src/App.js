@@ -28,10 +28,19 @@ export default function ConsultaIPTU() {
           raw: false,
           defval: ''
         });
+
+        // Normalizar chaves (remover espaços extras) e valores
+        const dadosNormalizados = dados.map(item => {
+          const novoItem = {};
+          Object.keys(item).forEach(key => {
+            novoItem[key.trim()] = item[key];
+          });
+          return novoItem;
+        });
         
-        console.log('Planilha carregada com sucesso:', dados.length, 'registros');
-        console.log('Primeiro registro:', dados[0]);
-        setPlanilhaData(dados);
+        console.log('Planilha carregada com sucesso:', dadosNormalizados.length, 'registros');
+        console.log('Primeiro registro:', dadosNormalizados[0]);
+        setPlanilhaData(dadosNormalizados);
       } catch (error) {
         console.error('Erro ao carregar planilha:', error);
         const dadosExemplo = [
@@ -61,7 +70,9 @@ export default function ConsultaIPTU() {
   const parseValor = (valor) => {
     if (typeof valor === 'number') return valor;
     if (!valor) return 0;
-    return parseFloat(valor.toString().replace(/\./g, '').replace(',', '.'));
+    // Remove R$, espaços e vírgulas (formato americano/excel: 76,294.07)
+    const valorLimpo = valor.toString().replace(/R\$/g, '').replace(/\s/g, '').replace(/,/g, '');
+    return parseFloat(valorLimpo);
   };
 
   const formatarMoeda = (valor) => {
@@ -126,11 +137,7 @@ export default function ConsultaIPTU() {
       <div style={styles.header}>
         <div style={styles.headerCard}>
           <div style={styles.headerContent}>
-            <div style={styles.logoPlaceholder}></div>
-            <div style={styles.headerText}>
-              <div style={styles.prefeituraDe}>PREFEITURA DE</div>
-              <div style={styles.boituva}>BOITUVA</div>
-            </div>
+            <img src="logo.png" alt="Prefeitura de Boituva" style={styles.logo} />
           </div>
         </div>
 
@@ -154,13 +161,12 @@ export default function ConsultaIPTU() {
             Número do Cadastro do Imóvel
           </label>
           <div style={styles.inputContainer}>
-            <span style={styles.hashIcon}>#</span>
             <input
               type="text"
               value={cadastro}
               onChange={(e) => setCadastro(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Ex: 01.02.034.0567.001"
+              placeholder="Digite apenas números"
               style={styles.input}
             />
           </div>
@@ -344,16 +350,16 @@ const styles = {
   headerContent: {
     display: 'flex',
     alignItems: 'center',
-    gap: '16px'
+    gap: '16px',
+    justifyContent: 'center'
   },
-  logoPlaceholder: {
-    width: '64px',
+  logo: {
     height: '64px',
-    background: '#e5e7eb',
-    borderRadius: '4px'
+    width: 'auto'
   },
   headerText: {
-    textAlign: 'left'
+    textAlign: 'left',
+    display: 'none'
   },
   prefeituraDe: {
     fontSize: '14px',
@@ -415,7 +421,7 @@ const styles = {
   },
   input: {
     width: '100%',
-    paddingLeft: '48px',
+    paddingLeft: '16px',
     paddingRight: '16px',
     paddingTop: '16px',
     paddingBottom: '16px',
