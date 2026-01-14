@@ -147,7 +147,7 @@ export default function ConsultaIPTU() {
         <p style={styles.subtitle}>
           {dados 
             ? 'Consulte os dados cadastrais e valores do seu imóvel de forma simples e rápida.'
-            : 'Informe o número do cadastro para consultar débitos e emitir guias.'}
+            : 'Informe o número do cadastro para consultar débitos.'}
         </p>
       </div>
 
