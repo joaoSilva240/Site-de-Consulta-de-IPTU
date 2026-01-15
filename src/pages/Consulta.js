@@ -134,12 +134,12 @@ export default function Consulta() {
       <style>{cssStyles}</style>
 
       {/* Header */}
-      <div style={styles.header}>
+      {/* <div style={styles.header}>
         <div style={styles.headerCard}>
             <div style={styles.headerContent}>
                 <h1 style={styles.titleMain}>Consulta IPTU</h1>
             </div>
-        </div>
+        </div> */}
 
         <h1 style={styles.title}>
           {dados ? 'Dados do Imóvel' : 'Consulta de Valores'}
