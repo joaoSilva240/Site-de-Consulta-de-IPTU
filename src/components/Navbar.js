@@ -55,7 +55,7 @@ const styles = {
   },
   container: {
     width: '100%',
-    maxWidth: '1200px',
+    maxWidth: '95vw',
     margin: '0 auto',
     display: 'flex',
     justifyContent: 'space-between',

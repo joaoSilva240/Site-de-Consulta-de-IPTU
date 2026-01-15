@@ -326,7 +326,7 @@ const styles = {
     marginBottom: '32px'
   },
   contentContainer: {
-    maxWidth: '900px',
+    maxWidth: '90vw',
     margin: '0 auto',
     padding: '0 16px'
   },
