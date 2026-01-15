@@ -69,7 +69,7 @@ const styles = {
   logo: {
     height: '50px',
     width: 'auto',
-    background: 'white',
+    background: 'rgb(132, 204, 22)',
     padding: '4px',
     borderRadius: '4px'
   },
