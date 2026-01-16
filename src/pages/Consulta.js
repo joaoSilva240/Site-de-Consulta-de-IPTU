@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
-import { Search, MapPin, Calendar, Building2, Mountain, Sparkles, Hammer, Lightbulb, FileText, BadgePercent } from 'lucide-react';
+import { Search, MapPin, Calendar, Building2, Mountain, Sparkles, Hammer, Lightbulb, FileText, BadgePercent, Info } from 'lucide-react';
 
 export default function Consulta() {
   const [cadastro, setCadastro] = useState('');
@@ -143,7 +143,12 @@ export default function Consulta() {
           TAXA_LIMPEZA_2026: parseValor(resultado['TAXA LIMPEZA 2026'] || resultado.TAXA_LIMPEZA_2026),
           TAXA_CONSERVACAO_2026: parseValor(resultado['TAXA CONSERVAÇÃO 2026'] || resultado.TAXA_CONSERVACAO_2026),
           CIP_2026: parseValor(resultado['CIP 2026'] || resultado.CIP_2026),
-          TAXA_EXPEDIENTE_2026: parseValor(resultado['TAXA EXPEDIENTE 2026'] || resultado.TAXA_EXPEDIENTE_2026)
+          TAXA_EXPEDIENTE_2026: parseValor(resultado['TAXA EXPEDIENTE 2026'] || resultado.TAXA_EXPEDIENTE_2026),
+
+          // Observações
+          OBS_TERRENO: resultado['OBSERVAÇÕES VALOR VENAL TERRENO'] || '',
+          OBS_CONSTRUCAO: resultado['OBSERVAÇÕES VALOR VENAL CONSTRUÇÃO'] || '',
+          OBS_IPTU: resultado['OBSERVAÇÕES IPTU'] || ''
         };
 
         setDados(dadosNormalizados);
@@ -476,6 +481,38 @@ export default function Consulta() {
                 </div>
               </div>
             </div>
+
+            {/* Observações */}
+            {(dados.OBS_TERRENO || dados.OBS_CONSTRUCAO || dados.OBS_IPTU) && (
+              <div style={styles.taxCard}>
+                <div style={{...styles.taxCardHeader, background: 'linear-gradient(to right, #3b82f6, #2563eb)'}}>
+                  <Info size={28} />
+                  <h2 style={styles.taxCardTitle}>Observações</h2>
+                </div>
+
+                <div style={styles.taxCardBody}>
+                  {dados.OBS_TERRENO && (
+                    <div style={styles.obsRow}>
+                      <span style={styles.obsLabel}>Observações Valor Venal Terreno</span>
+                      <span style={styles.obsValue}>{dados.OBS_TERRENO}</span>
+                    </div>
+                  )}
+                  {dados.OBS_CONSTRUCAO && (
+                    <div style={styles.obsRow}>
+                      <span style={styles.obsLabel}>Observações Valor Venal Construção</span>
+                      <span style={styles.obsValue}>{dados.OBS_CONSTRUCAO}</span>
+                    </div>
+                  )}
+                  {dados.OBS_IPTU && (
+                    <div style={styles.obsRow}>
+                      <span style={styles.obsLabel}>Observações IPTU</span>
+                      <span style={styles.obsValue}>{dados.OBS_IPTU}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
       )}
@@ -785,6 +822,25 @@ const styles = {
   compositionValue: {
     fontSize: '12px',
     fontWeight: 'bold'
+  },
+  obsRow: {
+    marginBottom: '16px',
+    paddingBottom: '16px',
+    borderBottom: '1px solid #f3f4f6'
+  },
+  obsLabel: {
+    display: 'block',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    color: '#6b7280',
+    textTransform: 'uppercase',
+    marginBottom: '8px'
+  },
+  obsValue: {
+    display: 'block',
+    color: '#1f2937',
+    fontSize: '14px',
+    lineHeight: '1.6'
   },
   footer: {
     textAlign: 'center',
