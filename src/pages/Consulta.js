@@ -70,7 +70,10 @@ export default function Consulta() {
             'TAXA LIMPEZA 2026': '138.50',
             'TAXA CONSERVAÇÃO 2026': '72.00',
             'CIP 2026': '45.00',
-            'TAXA EXPEDIENTE 2026': '25.00'
+            'TAXA EXPEDIENTE 2026': '25.00',
+            'OBSERVAÇÕES VALOR VENAL TERRENO': 'Grande discrepância no Valor Venal do Terreno (2026 muito maior que 2025). Sugere-se verificar a legislação municipal vigente e os fatores de correção aplicados para garantir a precisão do novo cálculo do valor venal.',
+            'OBSERVAÇÕES VALOR VENAL CONSTRUÇÃO': 'A reavaliação da construção resultou em um aumento substancial do Valor Venal (Ex: R$ 191.651,39 vs R$ 137.989,00). Conferir a metragem quadrada e o padrão construtivo classificado para evitar inconsistências no cálculo.',
+            'OBSERVAÇÕES IPTU': 'A alta no IPTU (Ex: R$ 1.876,90 vs R$ 1.314,41) é proporcional ao reajuste do Valor Venal Total. Não houve isenções aplicadas neste cadastro, confirmando o cálculo baseado nos valores de 2026.'
           }
         ];
         console.log('Usando dados de exemplo');
@@ -108,8 +111,10 @@ export default function Consulta() {
     setErro('');
 
     setTimeout(() => {
+      const normalize = (str) => str ? str.toString().replace(/[^0-9]/g, '') : '';
+
       const resultado = planilhaData.find(
-        item => item.CADASTRO === cadastro.trim()
+        item => normalize(item.CADASTRO) === normalize(cadastro)
       );
 
       if (resultado) {
@@ -485,7 +490,7 @@ export default function Consulta() {
             {/* Observações */}
             {(dados.OBS_TERRENO || dados.OBS_CONSTRUCAO || dados.OBS_IPTU) && (
               <div style={styles.taxCard}>
-                <div style={{...styles.taxCardHeader, background: 'linear-gradient(to right, #3b82f6, #2563eb)'}}>
+                <div style={{...styles.taxCardHeader, background: 'linear-gradient(to right, #f7a700, #d97706)'}}>
                   <Info size={28} />
                   <h2 style={styles.taxCardTitle}>Observações</h2>
                 </div>
