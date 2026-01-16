@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
-import { Search, MapPin, Calendar } from 'lucide-react';
+import { Search, MapPin, Calendar, Building2, Mountain, Sparkles, Hammer, Lightbulb, FileText, BadgePercent } from 'lucide-react';
 
 export default function Consulta() {
   const [cadastro, setCadastro] = useState('');
@@ -47,16 +47,30 @@ export default function Consulta() {
           {
             CADASTRO: '01.02.034.0567.001',
             'ENDEREÇO': 'Rua São Pedro, 123 - Centro, Boituva - SP',
-            'AREA DO TERRENO M²': '250,00',
-            'AREA CONSTRUÇÃO M²': '185,50',
-            'VALOR VENAL CONSTRUÇÃO 2025': '230500,00',
-            'VALOR VENAL TERRENO 2025': '150000,00',
-            'VALOR VENAL TOTAL 2025': '380500,00',
-            'IPTU 2025': '1250,00',
-            'VALOR VENAL CONSTRUÇÃO 2026': '245000,00',
-            'VALOR VENAL TERRENO 2026': '165000,00',
-            'VALOR VENAL TOTAL 2026': '410000,00',
-            'IPTU 2026': '1380,50'
+            'AREA DO TERRENO M²': '250.00',
+            'AREA CONSTRUÇÃO M²': '185.50',
+            'VALOR VENAL CONSTRUÇÃO 2025': '230500.00',
+            'VALOR VENAL TERRENO 2025': '150000.00',
+            'VALOR VENAL TOTAL 2025': '380500.00',
+            'IPTU 2025': '1250.00',
+            'IMPOSTO TERRITORIAL 2025': '420.00',
+            'IMPOSTO PREDIAL 2025': '580.00',
+            'ISENÇÃO 2025': '0.00',
+            'TAXA LIMPEZA 2025': '125.00',
+            'TAXA CONSERVAÇÃO 2025': '65.00',
+            'CIP 2025': '35.00',
+            'TAXA EXPEDIENTE 2025': '25.00',
+            'VALOR VENAL CONSTRUÇÃO 2026': '245000.00',
+            'VALOR VENAL TERRENO 2026': '165000.00',
+            'VALOR VENAL TOTAL 2026': '410000.00',
+            'IPTU 2026': '1380.50',
+            'IMPOSTO TERRITORIAL 2026': '460.00',
+            'IMPOSTO PREDIAL 2026': '640.00',
+            'ISENÇÃO 2026': '0.00',
+            'TAXA LIMPEZA 2026': '138.50',
+            'TAXA CONSERVAÇÃO 2026': '72.00',
+            'CIP 2026': '45.00',
+            'TAXA EXPEDIENTE 2026': '25.00'
           }
         ];
         console.log('Usando dados de exemplo');
@@ -104,14 +118,32 @@ export default function Consulta() {
           ENDERECO: resultado['ENDEREÇO'] || resultado.ENDERECO,
           AREA_TERRENO: parseValor(resultado['AREA DO TERRENO M²'] || resultado.AREA_TERRENO),
           AREA_CONSTRUCAO: parseValor(resultado['AREA CONSTRUÇÃO M²'] || resultado.AREA_CONSTRUCAO),
+
+          // 2025 Values
           VALOR_VENAL_CONSTRUCAO_2025: parseValor(resultado['VALOR VENAL CONSTRUÇÃO 2025'] || resultado.VALOR_VENAL_CONSTRUCAO_2025),
           VALOR_VENAL_TERRENO_2025: parseValor(resultado['VALOR VENAL TERRENO 2025'] || resultado.VALOR_VENAL_TERRENO_2025),
           VALOR_VENAL_TOTAL_2025: parseValor(resultado['VALOR VENAL TOTAL 2025'] || resultado.VALOR_VENAL_TOTAL_2025),
           IPTU_2025: parseValor(resultado['IPTU 2025'] || resultado.IPTU_2025),
+          IMPOSTO_TERRITORIAL_2025: parseValor(resultado['IMPOSTO TERRITORIAL 2025'] || resultado.IMPOSTO_TERRITORIAL_2025),
+          IMPOSTO_PREDIAL_2025: parseValor(resultado['IMPOSTO PREDIAL 2025'] || resultado.IMPOSTO_PREDIAL_2025),
+          ISENCAO_2025: parseValor(resultado['ISENÇÃO 2025'] || resultado.ISENCAO_2025),
+          TAXA_LIMPEZA_2025: parseValor(resultado['TAXA LIMPEZA 2025'] || resultado.TAXA_LIMPEZA_2025),
+          TAXA_CONSERVACAO_2025: parseValor(resultado['TAXA CONSERVAÇÃO 2025'] || resultado.TAXA_CONSERVACAO_2025),
+          CIP_2025: parseValor(resultado['CIP 2025'] || resultado.CIP_2025),
+          TAXA_EXPEDIENTE_2025: parseValor(resultado['TAXA EXPEDIENTE 2025'] || resultado.TAXA_EXPEDIENTE_2025),
+
+          // 2026 Values
           VALOR_VENAL_CONSTRUCAO_2026: parseValor(resultado['VALOR VENAL CONSTRUÇÃO 2026'] || resultado.VALOR_VENAL_CONSTRUCAO_2026),
           VALOR_VENAL_TERRENO_2026: parseValor(resultado['VALOR VENAL TERRENO 2026'] || resultado.VALOR_VENAL_TERRENO_2026),
           VALOR_VENAL_TOTAL_2026: parseValor(resultado['VALOR VENAL TOTAL 2026'] || resultado.VALOR_VENAL_TOTAL_2026),
-          IPTU_2026: parseValor(resultado['IPTU 2026'] || resultado.IPTU_2026)
+          IPTU_2026: parseValor(resultado['IPTU 2026'] || resultado.IPTU_2026),
+          IMPOSTO_TERRITORIAL_2026: parseValor(resultado['IMPOSTO TERRITORIAL 2026'] || resultado.IMPOSTO_TERRITORIAL_2026),
+          IMPOSTO_PREDIAL_2026: parseValor(resultado['IMPOSTO PREDIAL 2026'] || resultado.IMPOSTO_PREDIAL_2026),
+          ISENCAO_2026: parseValor(resultado['ISENÇÃO 2026'] || resultado.ISENCAO_2026),
+          TAXA_LIMPEZA_2026: parseValor(resultado['TAXA LIMPEZA 2026'] || resultado.TAXA_LIMPEZA_2026),
+          TAXA_CONSERVACAO_2026: parseValor(resultado['TAXA CONSERVAÇÃO 2026'] || resultado.TAXA_CONSERVACAO_2026),
+          CIP_2026: parseValor(resultado['CIP 2026'] || resultado.CIP_2026),
+          TAXA_EXPEDIENTE_2026: parseValor(resultado['TAXA EXPEDIENTE 2026'] || resultado.TAXA_EXPEDIENTE_2026)
         };
 
         setDados(dadosNormalizados);
@@ -267,6 +299,70 @@ export default function Consulta() {
                     {formatarMoeda(dados.IPTU_2025)}
                   </span>
                 </div>
+
+                {/* Composição do Imposto 2025 */}
+                <div style={styles.compositionContainer}>
+                  <p style={styles.compositionTitle}>Composição do Imposto</p>
+                  <div style={styles.compositionList}>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <Mountain size={18} />
+                        <span>Imposto Territorial</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.IMPOSTO_TERRITORIAL_2025)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <Building2 size={18} />
+                        <span>Imposto Predial</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.IMPOSTO_PREDIAL_2025)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <BadgePercent size={18} />
+                        <span>Isenção</span>
+                      </div>
+                      <span style={{...styles.compositionValue, color: '#ef4444'}}>{formatarMoeda(dados.ISENCAO_2025)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <Sparkles size={18} />
+                        <span>Taxa de Limpeza</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.TAXA_LIMPEZA_2025)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <Hammer size={18} />
+                        <span>Taxa de Conservação</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.TAXA_CONSERVACAO_2025)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <Lightbulb size={18} />
+                        <span>CIP</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.CIP_2025)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <FileText size={18} />
+                        <span>Taxa de Expediente</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.TAXA_EXPEDIENTE_2025)}</span>
+                    </div>
+
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -313,6 +409,70 @@ export default function Consulta() {
                   <span style={{...styles.iptuValue, color: '#14b8a6'}}>
                     {formatarMoeda(dados.IPTU_2026)}
                   </span>
+                </div>
+
+                {/* Composição do Imposto 2026 */}
+                <div style={styles.compositionContainer}>
+                  <p style={styles.compositionTitle}>Composição do Imposto</p>
+                  <div style={styles.compositionList}>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <Mountain size={18} />
+                        <span>Imposto Territorial</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.IMPOSTO_TERRITORIAL_2026)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <Building2 size={18} />
+                        <span>Imposto Predial</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.IMPOSTO_PREDIAL_2026)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <BadgePercent size={18} />
+                        <span>Isenção</span>
+                      </div>
+                      <span style={{...styles.compositionValue, color: '#ef4444'}}>{formatarMoeda(dados.ISENCAO_2026)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <Sparkles size={18} />
+                        <span>Taxa de Limpeza</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.TAXA_LIMPEZA_2026)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <Hammer size={18} />
+                        <span>Taxa de Conservação</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.TAXA_CONSERVACAO_2026)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <Lightbulb size={18} />
+                        <span>CIP</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.CIP_2026)}</span>
+                    </div>
+
+                    <div style={styles.compositionRow}>
+                      <div style={styles.compositionLabel}>
+                        <FileText size={18} />
+                        <span>Taxa de Expediente</span>
+                      </div>
+                      <span style={styles.compositionValue}>{formatarMoeda(dados.TAXA_EXPEDIENTE_2026)}</span>
+                    </div>
+
+                  </div>
                 </div>
               </div>
             </div>
@@ -592,6 +752,38 @@ const styles = {
   },
   iptuValue: {
     fontSize: '24px',
+    fontWeight: 'bold'
+  },
+  compositionContainer: {
+    paddingTop: '8px'
+  },
+  compositionTitle: {
+    fontSize: '10px',
+    fontWeight: '900',
+    color: '#9ca3af',
+    textTransform: 'uppercase',
+    letterSpacing: '0.1em',
+    marginBottom: '12px'
+  },
+  compositionList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px'
+  },
+  compositionRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    color: '#4b5563'
+  },
+  compositionLabel: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    fontSize: '12px'
+  },
+  compositionValue: {
+    fontSize: '12px',
     fontWeight: 'bold'
   },
   footer: {
