@@ -1,0 +1,14 @@
+button:hover:not(:disabled) {
+  background: #0f766e !important;
+}
+
+input:focus {
+  outline: 2px solid #14b8a6;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .taxCardsContainer {
+    grid-template-columns: 1fr;
+  }
+}
