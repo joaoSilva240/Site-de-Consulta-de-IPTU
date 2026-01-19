@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
 import { Search, MapPin, Calendar, Building2, Mountain, Sparkles, Hammer, Lightbulb, FileText, BadgePercent, Info } from 'lucide-react';
+import './Consulta.css';
 
 export default function Consulta() {
   const [cadastro, setCadastro] = useState('');
@@ -173,7 +174,6 @@ export default function Consulta() {
 
   return (
     <div style={styles.container}>
-      <style>{cssStyles}</style>
 
       {/* Header */}
        <div style={styles.header}>
@@ -854,20 +854,3 @@ const styles = {
     fontSize: '14px'
   }
 };
-
-const cssStyles = `
-  button:hover:not(:disabled) {
-    background: #0f766e !important;
-  }
-
-  input:focus {
-    outline: 2px solid #14b8a6;
-    outline-offset: 2px;
-  }
-
-  @media (max-width: 768px) {
-    .taxCardsContainer {
-      grid-template-columns: 1fr;
-    }
-  }
-`;
