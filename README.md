@@ -97,8 +97,8 @@ graph TB
     User[👤 Usuário] --> Browser[🌐 Navegador Web]
     Browser --> React[⚛️ React App]
     React --> Router[React Router]
-    Router --> Consulta[📍 Página Consulta (/)]
-    Router --> Script[📄 Página Script (/script)]
+    Router --> Consulta["📍 Página Consulta (/)"]
+    Router --> Script["📄 Página Script (/script)"]
     
     subgraph "Processamento de Dados"
     Consulta --> XLSX[📊 XLSX Parser]
