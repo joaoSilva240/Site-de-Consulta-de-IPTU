@@ -160,4 +160,4 @@ Site-de-Consulta-de-IPTU/
 
 ## 📄 Licença
 
-Este projeto é de uso interno/privado para fins de consulta municipal.
+Este projeto é de fim educacional e seus dados são fictícios.
